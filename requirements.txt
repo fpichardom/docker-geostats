@@ -1,1 +1,13 @@
 # Add your extra requirements here
+
+numpy
+matplotlib
+pandas
+scipy
+geopandas
+libpysal
+esda
+splot
+pointpats
+statsmodels
+seaborn
