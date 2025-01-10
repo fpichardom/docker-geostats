@@ -1,0 +1,17 @@
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    ports:
+      - 8888:8888
+    env_file:
+      - .env
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+      - DOCKER_STACKS_JUPYTER_CMD=${DOCKER_STACKS_JUPYTER_CMD}
+    command: >
+      /usr/local/bin/start-notebook.py
+      --NotebookApp.token=${JUPYTER_TOKEN}

@@ -1,0 +1,19 @@
+{
+    "name": "Python 3 Geo Stats",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "jupyter",
+    "workspaceFolder": "/home/jovyan/work",
+    "customizations": {
+        "vscode":{
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "python.linting.enabled": true
+            }
+        }
+    }
+}
