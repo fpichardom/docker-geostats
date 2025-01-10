@@ -4,14 +4,15 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./notebooks:/home/jovyan/work
+      - ./work:/home/jovyan/work
+      - ./requirements.txt:/tmp/requirements.txt
     ports:
-      - 8888:8888
+      - "${JUPYTER_PORT:-8888}:8888"
     env_file:
       - .env
     environment:
-      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
-      - DOCKER_STACKS_JUPYTER_CMD=${DOCKER_STACKS_JUPYTER_CMD}
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN:-""}
+      - DOCKER_STACKS_JUPYTER_CMD=${DOCKER_STACKS_JUPYTER_CMD:-"lab"}
     command: >
-      /usr/local/bin/start-notebook.py
-      --NotebookApp.token=${JUPYTER_TOKEN}
+      start-notebook.py
+      --NotebookApp.token='${JUPYTER_TOKEN}'

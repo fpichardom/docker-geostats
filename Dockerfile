@@ -1,12 +1,19 @@
 FROM quay.io/jupyter/base-notebook:latest
 
-# Copy requirements.txt from the build context root directory
-COPY requirements.txt /tmp/requirements.txt
+USER root
 
-RUN pip install -r /tmp/requirements.txt
+# System dependencies if needed
+# RUN apt-get update && apt-get install -y \
+#     package-name \
+#     && rm -rf /var/lib/apt/lists/*
+
+USER ${NB_UID}
+
+# Copy requirements.txt from the build context root directory
+COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/requirements.txt
+
+# Install Python packages
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Set the working directory
 WORKDIR /home/jovyan/work
-
-# Start the Jupyter Notebook server
-ENTRYPOINT [ "start-notebook.py" ]
