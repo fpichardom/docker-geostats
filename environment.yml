@@ -1,0 +1,30 @@
+name: base
+channels:
+  - ejolly
+  - conda-forge
+  - defaults
+dependencies:
+  # Core scientific packages
+  - numpy
+  - matplotlib
+  - pandas
+  - scipy
+  - seaborn
+  - statsmodels
+  - spreg
+  - mgwr
+  
+  # Geospatial packages
+  - geopandas
+  - libpysal
+  - esda
+  - pointpats
+  - splot
+  
+  # R integration
+  - pymer4
+  - r-irkernel  # R kernel for Jupyter
+  
+  # Additional useful packages
+  - pip:
+    - contextily

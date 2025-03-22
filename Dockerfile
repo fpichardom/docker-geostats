@@ -9,10 +9,19 @@ USER root
 
 USER ${NB_UID}
 
-# Copy requirements.txt from the build context root directory
+# Configure conda channels with conda-forge priority for R packages
+RUN conda config --add channels conda-forge && \
+    conda config --set channel_priority strict
+
+# Copy environment files
+COPY --chown=${NB_UID}:${NB_GID} environment.yml /tmp/environment.yml
 COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/requirements.txt
 
-# Install Python packages
+# Install conda packages with mamba for faster resolution
+RUN mamba env update -n base -f /tmp/environment.yml && \
+    mamba clean --all -f -y
+
+# Install any remaining pip-only packages
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Set the working directory
