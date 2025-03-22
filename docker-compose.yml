@@ -5,7 +5,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./work:/home/jovyan/work
-      - ./requirements.txt:/tmp/requirements.txt
     ports:
       - "${JUPYTER_PORT:-8888}:8888"
     env_file:
